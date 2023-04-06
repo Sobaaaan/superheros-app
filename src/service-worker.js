@@ -70,3 +70,19 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+self.addEventListener('fetch', function (event) {
+  if (!(event.request.url.indexOf('http') === 0)) return;
+  event.respondWith(
+    caches.open('superheroes').then((cache) => {
+      return cache.match(event.request).then((response) => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then((response) => {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
+});
