@@ -5,7 +5,7 @@ const { Title } = Typography;
 
 const Header = () => {
     return (
-        <Title>SuperHeroes and Villians from all universes</Title>
+        <Title>Smartest SuperHeroes and Villians</Title>
     );
 };
 
